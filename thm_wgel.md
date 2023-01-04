@@ -60,7 +60,7 @@ OpenSSH 7.2p2 - Username Enumeration
 
 - Discovered JS comment in source page of default apache page that could be used as a username:
 
-<!-- Jessie don't forget to udate the webiste -->
+" <!- Jessie don't forget to udate the webiste --> "
 
 --------------------------------------------------
 
