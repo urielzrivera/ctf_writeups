@@ -1,8 +1,8 @@
 
 
-IP= 10.10.124.163	:22,80
-All ports scanned	:22,80
+IP= 10.10.124.163
 
+### Enumeration
 
 ```
 $ nmap -p- -T5 10.10.124.163
@@ -43,7 +43,7 @@ Entering directory: http://10.10.124.163/sitemap/ ----
 ==> DIRECTORY: http://10.10.124.163/sitemap/.ssh/
 
 ```
-- site contains developement team information (potential users for ssh login)
+- Site contains developement team information (potential users for ssh login)
 - RSA ID found in /.ssh directory discovered with dirb
 
 ```
@@ -87,7 +87,7 @@ jessie@CorpOne:~/Documents$ cat user_flag.txt
 [REDACTED]
 ```
 
-- Time to find the root flag.
+### Privilege Escalation
 
 - User has unrestricted access as far as sudo permissions go, but
 we can see that the user has perms to use wget as root without a password. 
