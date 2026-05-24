@@ -1,9 +1,10 @@
-# Machine Name
+# Appointment
 
-- Platform:
-- Difficulty:
-- Date: 
-- IP: 10.x.x.x
+- Platform: Hack The Box
+- Difficulty: Easy
+- Date: 2026-05-24
+- OS: Linux
+- IP: 10.129.13.127
 
 # Enumeration
 
@@ -12,10 +13,7 @@
 ```bash
 nmap -sC -sV $IP -oN recon/initial
 ```
-
-### Findings
-
-```
+```text
 # Nmap 7.98 scan initiated Sun May 24 10:58:45 2026 as: /usr/lib/nmap/nmap --privileged -sV -sC -oN recon/initial 10.129.13.127
 Nmap scan report for 10.129.13.127
 Host is up (0.20s latency).
@@ -51,8 +49,7 @@ admin'#:password
 
 # Flags
 
-## Root
-
+#### Root/Admin
 ```text
 Congratulations!
 e3d0796d002a446c0e622226f42e9672
@@ -62,7 +59,5 @@ e3d0796d002a446c0e622226f42e9672
 
 # Lessons Learned
 
-- Key takeaway
-- Enumeration lesson
 - Missed clues: Didn't read tasks thoroughly and missed next step for exploitation.
 - New/Useful Commands or Techniques: Testing SQL Injection on Front-end site.
