@@ -1,10 +1,10 @@
 # Appointment
 
-- Platform: Hack The Box
-- Difficulty: Easy
-- Date: 2026-05-24
-- OS: Linux
-- IP: 10.129.13.127
+**Platform**: Hack The Box\
+**Difficulty**: Very Easy\
+**Date**: 2026-05-24\
+**OS**: Linux\
+**IP**: 10.129.13.127
 
 # Enumeration
 
@@ -37,10 +37,12 @@ Notes:
 
 ## Vulnerability
 
-Task 10 asks us: If user input is not handled carefully, it could be interpreted as a comment. Use a comment to login as admin without knowing the password. What is the first word on the webpage returned?
+Task 10: 
+> If user input is not handled carefully, it could be interpreted as a comment. Use a comment to login as admin without knowing the password. What is the first word on the webpage returned?
 
 ## Exploit
-
+Following steps in Task 10, we use `admin'#` for the username, and anything for the password on the login page.\
+We are then presented with  a congratulations message and the root flag.
 ```text
 admin'#:password
 ```
