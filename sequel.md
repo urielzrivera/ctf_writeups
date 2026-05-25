@@ -10,10 +10,12 @@
 
 Task 1
 > During our scan, which port do we find serving MySQL?
+
 `3306`
 
 Task 2
 > What community-developed MySQL version is the target running?
+
 `MariaDB`
 
 ## Nmap
@@ -43,10 +45,6 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 210.83 seconds
 ```
 
-#### Findings
-* Port 3306 MySQL version 5.5.5-10.3.27 MariaDB
-
-
 ---
 
 # Initial Foothold
@@ -60,7 +58,8 @@ mysql -? | grep "user"
 
 Task 4
 > Which username allows us to log into this MariaDB instance without providing a password?
-Upon researching, we found username `root` allows us to login to MySQL instances without a password.
+
+Upon researching, we found username `root` allows us to login to MySQL instances without a password but we are prompted with an error that the host doesn't support SSL. SSL connection is established by default, so we have to force the connection to skip it.
 
 ```bash
 mysql -u root -h $IP
@@ -86,10 +85,12 @@ Tasks 5 & 6 require us to dig through some Documentation to understand the Maria
 
 Task 5
 > In SQL, what symbol can we use to specify within the query that we want to display everything inside a table?
+
 `*`
 
 Task 6
 > In SQL, what symbol do we need to end each query with?
+
 `;`
 
 From here, we can start looking at the databases on the server to try and find our flag and complete the machine.
@@ -114,9 +115,7 @@ Task 8
 > What is the command in MySQL to select a database to interact with?
 
 ```bash
-MariaDB [mysql]> use htb
-Reading table information for completion of table and column names
-You can turn off this feature to get a quicker startup with -A
+MariaDB [mysql]> use htb;
 
 Database changed
 MariaDB [htb]> show tables;
@@ -147,7 +146,7 @@ MariaDB [htb]> describe config;
 Task 10
 > Which table has a column named "flag"?
 
-Using `DESC` didn't produce any columns with the name "flag", so after a little research we find the command `select * from tbl_name;` allows us to view the content of the `config` table.
+Using `DESC` didn't produce any columns with the name "flag", so after a little research we find the command `select * from tbl_name;` allows us to view the content of the `config` table and retrieve the flag to complete the machine.
 
 ```bash
 MariaDB [htb]> select * from config;
@@ -173,12 +172,3 @@ MariaDB [htb]> select * from config;
 ```text
 7b4bec00d1a39e3dd4e021ec3d915da8
 ```
-
----
-
-# Lessons Learned
-
-**Key takeaway**:\
-**Enumeration lesson**:\
-**Missed clues**:\
-**New/Useful Commands**:
