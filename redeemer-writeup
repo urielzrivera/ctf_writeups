@@ -1,0 +1,172 @@
+# Redeemer - Write-up
+ 
+ Date: May 11, 2026
+ Platform: Hack The Box
+ Difficulty: Very Easy
+ OS: Linux
+ IP Addr: 10.129.193.134
+ 
+ # Machine Overview
+ 
+ Initial Notes:
+ * Redis DB, enumeration and exploitation
+ * Task 1 asks which TCP port is open; SYN scan?
+ * 
+ 
+ Attack Path Summary:
+ 1.
+ 2.
+ 3.
+ 4.
+ 
+ # Recon
+
+ ### Nmap Scan
+Command 1: nmap -sV -A 10.129.193.134 -oN initial_scan
+Result: All ports in ignored state.
+
+Command 2: nmap -Pn -sV -A 10.129.193.134 -oN no_ping_scan
+Result: No results.
+
+Command 3: 
+``nmap -sT -sV -A 10.129.193.134 -oN tcp_scan
+
+Result: No results.
+
+Command 4: nmap -Pn -sS -A 10.129.193.134 -oN syn_scan
+Result: No results.
+
+Command 5: nmap -p- --open -sS --min-rate 5000 -Pn -vv 10.129.193.134 -oN fast_allports
+Result: Success
+
+Notes:
+* Open ports: 6379
+* Services: redis
+* Versions: Redis key-value store 5.0.7
+Interesting findings:
+- 
+
+### Service Enumeration
+
+#### Port 6379 - Redis
+
+Command 1: nmap -Pn -sV -A -vv -p6379 10.129.193.134 -oN service_scan
+
+Results: 
+PORT     STATE SERVICE REASON         VERSION
+6379/tcp open  redis   syn-ack ttl 63 Redis key-value store 5.0.7
+
+Observations:
+*
+*
+
+Potential Attack Vectors:
+- Redis 4.x/5.x Unauthenticated Code Execution via Metasploit
+- 
+
+# Initial Access
+
+### Vulnerability Identification:
+
+What looks exploitable:
+- 
+*
+
+Research:
+CVE(s):
+Exploit(s):
+Notes:
+
+### Exploitation Attempts
+
+#### Successful Exploit
+Commands
+
+Notes:
+- accessed server with no authentication, listed all keys, key 2 contained "flag"
+- 
+
+# POST-EXPLOIT ENUMERATION
+### System Info 
+
+Commands:
+10.129.193.134:6379> keys *
+1) "stor"
+2) "flag"
+3) "numb"
+4) "temp"
+(0.50s)
+10.129.193.134:6379> keys 2
+(empty array)
+(0.52s)
+10.129.193.134:6379> keys flag
+1) "flag"
+
+Notes:
+*
+
+Findings:
+* Users:
+* Interesting files:
+
+### SUID / Permissions
+Commands:
+Findings:
+*
+
+### Cron Jobs / Scheduled Tasks
+Commands:
+Findings:
+*
+
+### Credentials / Secrets
+Commands:
+Findings:
+*
+
+### Network / Internal Enumeration
+Commands:
+Findings:
+*
+
+# PRIVILEGE ESCALATION
+
+### Enumeration
+
+Tools used:
+Key Findings:
+
+10.129.193.134:6379> keys flag
+1) "flag"
+10.129.193.134:6379> mget flag
+1) "03e1d2b376c37ab3f5319922053953eb"
+10.129.193.134:6379> 
+
+
+### Exploitation Attempts
+#### Attempt 1
+Command:
+Result:
+
+### Successful PrivEsc
+Steps:
+Proof:
+Result:
+* 
+
+# FLAGS
+User Flag: 03e1d2b376c37ab3f5319922053953eb
+Root/Admin Flag:
+
+# LESSONS LEARNED
+
+Missed:
+*
+
+New Techniques:
+*
+
+Useful Commands Discovered:
+Command:
+Notes
+*
